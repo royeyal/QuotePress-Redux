@@ -45,13 +45,22 @@ function quotepress_redux_custom_post_type() {
         'label'                 => __('Quote', 'text_domain'),
         'description'           => __('Post Type Description', 'text_domain'),
         'labels'                => $labels,
-        'supports'              => array('title', 'editor', 'thumbnail', 'custom-fields'),
-        'taxonomies'            => array('category', 'post_tag'),
+        'supports' => [
+			'title',
+			'editor',
+			'thumbnail',
+			'custom-fields',
+		],
+        'taxonomies' => [
+			'category',
+			'post_tag',
+		],
         'hierarchical'          => false,
         'public'                => true,
         'show_ui'               => true,
         'show_in_menu'          => true,
         'menu_position'         => 5,
+        'menu_icon'           => 'dashicons-format-quote',
         'show_in_admin_bar'     => true,
         'show_in_nav_menus'     => true,
         'can_export'            => true,
@@ -59,6 +68,8 @@ function quotepress_redux_custom_post_type() {
         'exclude_from_search'   => false,
         'publicly_queryable'    => true,
         'capability_type'       => 'post',
+        'show_in_rest'          => true,
+        'rewrite'               => true,
     );
     register_post_type('quote', $args);
 }
