@@ -51,10 +51,10 @@ function quotepress_redux_custom_post_type() {
 			'thumbnail',
 			'custom-fields',
 		],
-        'taxonomies' => [
-			'category',
-			'post_tag',
-		],
+        // 'taxonomies' => [
+		// 	'category',
+		// 	'post_tag',
+		// ],
         'hierarchical'          => false,
         'public'                => true,
         'show_ui'               => true,
@@ -76,34 +76,30 @@ function quotepress_redux_custom_post_type() {
 add_action('init', 'quotepress_redux_custom_post_type', 0);
 
 function quotepress_redux_register_taxonomy() {
-
     $labels = array(
-          'name'              => __( 'Services', 'wpmu' ),
-          'singular_name'     => __( 'Service', 'wpmu' ),
-          'search_items'      => __( 'Search Services', 'wpmu' ),
-          'all_items'         => __( 'All Services', 'wpmu' ),
-          'edit_item'         => __( 'Edit Services', 'wpmu' ),
-          'update_item'       => __( 'Update Services', 'wpmu' ),
-          'add_new_item'      => __( 'Add New Services', 'wpmu' ),
-          'new_item_name'     => __( 'New Service Name', 'wpmu' ),
-          'menu_name'         => __( 'Services', 'wpmu' ),
+          'name'              => __( 'Quotes Categories', 'text-domain' ),
+          'singular_name'     => __( 'Quotes Category', 'text-domain' ),
+          'search_items'      => __( 'Search Quotes Categories', 'text-domain' ),
+          'all_items'         => __( 'All Quotes Categories', 'text-domain' ),
+          'edit_item'         => __( 'Edit Quotes Category', 'text-domain' ),
+          'update_item'       => __( 'Update Quotes Category', 'text-domain' ),
+          'add_new_item'      => __( 'Add New Quotes Category', 'text-domain' ),
+          'new_item_name'     => __( 'New Quotes Category Name', 'text-domain' ),
+          'menu_name'         => __( 'Quotes Categories', 'text-domain' ),
       );
       
-      $args = array(
-          'labels' => $labels,
-          'hierarchical' => true,
-          'sort' => true,
-          'args' => array( 'orderby' => 'term_order' ),
-          'rewrite' => array( 'slug' => 'services' ),
-          'show_admin_column' => true
-      );
-      
-      register_taxonomy( 'service', array( 'quote' ), $args);
-      
-  }
-  add_action( 'init', 'quotepress_redux_register_taxonomy' );
+    $args = array(
+        'labels' => $labels,
+        'hierarchical' => true,
+        'sort' => true,
+        'args' => array( 'orderby' => 'term_order' ),
+        'rewrite' => array( 'slug' => 'quotes_category' ),
+        'show_admin_column' => true
+    );    
+    register_taxonomy( 'quotes_category', array( 'quote' ), $args);      
+}
+add_action( 'init', 'quotepress_redux_register_taxonomy' );
   
-
 /**
  * Custom Fields
  */
