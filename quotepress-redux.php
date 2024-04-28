@@ -210,13 +210,7 @@ add_action( 'init', 'quotes_init' );
 
 register_taxonomy( 'custom_taxonomy', 'post', array(
 	'labels' => array(
-		'name' => 'register_taxonomy( 'custom_taxonomy', 'post', array(
-	'labels' => array(
 		'name' => 'Quotes Taxonomy'
-	),
-	'show_in_quick_edit' => false,
-	'meta_box_cb' => false
-)); Taxonomy'
 	),
 	'show_in_quick_edit' => false,
 	'meta_box_cb' => false
