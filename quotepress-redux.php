@@ -75,7 +75,7 @@ function quotepress_redux_custom_post_type() {
 }
 add_action('init', 'quotepress_redux_custom_post_type', 0);
 
-function wpmu_register_taxonomy() {
+function quotepress_redux_register_taxonomy() {
 
     $labels = array(
           'name'              => __( 'Services', 'wpmu' ),
@@ -101,7 +101,7 @@ function wpmu_register_taxonomy() {
       register_taxonomy( 'service', array( 'quote' ), $args);
       
   }
-  add_action( 'init', 'wpmu_register_taxonomy' );
+  add_action( 'init', 'quotepress_redux_register_taxonomy' );
   
 
 /**
