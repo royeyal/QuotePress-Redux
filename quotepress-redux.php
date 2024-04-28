@@ -174,7 +174,7 @@ function quotepress_redux_random_quote($atts) {
             return $output;
         }
     } else {
-        return '<p>No quotes found</p>';
+        return '<p>' . __('No quotes found', 'text_domain') . '</p>';
     }
     wp_reset_postdata();
 }
