@@ -42,7 +42,7 @@ function quotepress_redux_custom_post_type() {
         'filter_items_list'     => __('Filter quotes list', 'text_domain'),
     );
     $args = array(
-        'label'                 => __('Quote', 'text_domain'),
+        'label'                 => esc_html__( 'Quotes', 'text-domain' ),
         'description'           => __('Post Type Description', 'text_domain'),
         'labels'                => $labels,
         'supports' => [
@@ -60,20 +60,21 @@ function quotepress_redux_custom_post_type() {
         'show_ui'               => true,
         'show_in_menu'          => true,
         'menu_position'         => 5,
-        'menu_icon'           => 'dashicons-format-quote',
+        'menu_icon'             => 'dashicons-format-quote',
         'show_in_admin_bar'     => true,
         'show_in_nav_menus'     => true,
         'can_export'            => true,
         'has_archive'           => true,
         'exclude_from_search'   => false,
         'publicly_queryable'    => true,
-        'capability_type'       => 'post',
+        //'capability_type'       => 'post',
         'show_in_rest'          => true,
-        'rewrite'               => array( 'slug' => 'quotes' ),
+        'rewrite'               => true,
     );
     register_post_type('quote', $args);
 }
 add_action('init', 'quotepress_redux_custom_post_type', 0);
+ 
 
 /**
  * Custom Fields
@@ -191,37 +192,6 @@ function quotepress_redux_random_quote($atts) {
 add_shortcode('random_quote', 'quotepress_redux_random_quote');
 
 /**
- * Create Exclusive Custom Taxonomy
- */
-function view_init() {
-	register_taxonomy(
-		'quotes',
-		'post',
-		array(
-			'label' => __( 'Quotes' ),
-			'capabilities' => array(
-				'assign_terms' => 'edit_quotes',
-				'edit_terms' => 'publish_quotes'
-			)
-		)
-	);
-}
-add_action( 'init', 'quotes_init' );
-
-register_taxonomy( 'custom_taxonomy', 'post', array(
-	'labels' => array(
-		'name' => 'Quotes Taxonomy'
-	),
-	'show_in_quick_edit' => false,
-	'meta_box_cb' => false
-));
-
-add_action('add_meta_boxes', 'add_custom_meta_box');
-function add_custom_meta_box(){
-	add_meta_box( 'taxonomy_box', __('Quotes Taxonomy'), 'fill_custom_meta_box_content', 'post' ,'side');
-}
-
-/**
  * Deactivation hook
  */
 function quotepress_redux_deactivate() {
@@ -230,7 +200,7 @@ function quotepress_redux_deactivate() {
 	// Clear the permalinks to remove our post type's rules from the database.
 	flush_rewrite_rules();
 }
-register_deactivation_hook( __FILE__, 'quotepress_redux_deactivate' );
+//register_deactivation_hook( __FILE__, 'quotepress_redux_deactivate' );
 
 /**
  * Filter quotes using AJAX 
