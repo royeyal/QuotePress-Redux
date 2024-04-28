@@ -166,10 +166,10 @@ function quotepress_redux_random_quote($atts) {
             $quote_text = get_post_meta(get_the_ID(), 'quote_text', true);
             $author = get_post_meta(get_the_ID(), 'author', true);
 
-            $output = "<div style='color: {$atts['text_color']}; font-size: {$atts['font_size']}; background-color: {$atts['background_color']};'>";
+            $output = "<blockquote class='wp-block-quote' style='color: {$atts['text_color']}; font-size: {$atts['font_size']}; background-color: {$atts['background_color']};'>";
             $output .= "<p>{$quote_text}</p>";
             $output .= "<p><em>- {$author}</em></p>";
-            $output .= "</div>";
+            $output .= "</blockquote>";
 
             return $output;
         }
