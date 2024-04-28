@@ -69,7 +69,7 @@ function quotepress_redux_custom_post_type() {
         'publicly_queryable'    => true,
         'capability_type'       => 'post',
         'show_in_rest'          => true,
-        'rewrite'               => true,
+        'rewrite'               => array( 'slug' => 'quotes' ),
     );
     register_post_type('quote', $args);
 }
