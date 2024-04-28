@@ -1,0 +1,21 @@
+/* Styles for the Quote Details meta box */
+#quotepress_redux_quote_details {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+}
+
+#quotepress_redux_quote_details label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+#quotepress_redux_quote_details textarea,
+#quotepress_redux_quote_details input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
