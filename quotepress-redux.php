@@ -67,14 +67,42 @@ function quotepress_redux_custom_post_type() {
         'has_archive'           => true,
         'exclude_from_search'   => false,
         'publicly_queryable'    => true,
-        //'capability_type'       => 'post',
+        'capability_type'       => 'post',
         'show_in_rest'          => true,
         'rewrite'               => true,
     );
     register_post_type('quote', $args);
 }
 add_action('init', 'quotepress_redux_custom_post_type', 0);
- 
+
+function wpmu_register_taxonomy() {
+
+    $labels = array(
+          'name'              => __( 'Services', 'wpmu' ),
+          'singular_name'     => __( 'Service', 'wpmu' ),
+          'search_items'      => __( 'Search Services', 'wpmu' ),
+          'all_items'         => __( 'All Services', 'wpmu' ),
+          'edit_item'         => __( 'Edit Services', 'wpmu' ),
+          'update_item'       => __( 'Update Services', 'wpmu' ),
+          'add_new_item'      => __( 'Add New Services', 'wpmu' ),
+          'new_item_name'     => __( 'New Service Name', 'wpmu' ),
+          'menu_name'         => __( 'Services', 'wpmu' ),
+      );
+      
+      $args = array(
+          'labels' => $labels,
+          'hierarchical' => true,
+          'sort' => true,
+          'args' => array( 'orderby' => 'term_order' ),
+          'rewrite' => array( 'slug' => 'services' ),
+          'show_admin_column' => true
+      );
+      
+      register_taxonomy( 'service', array( 'quote' ), $args);
+      
+  }
+  add_action( 'init', 'wpmu_register_taxonomy' );
+  
 
 /**
  * Custom Fields
