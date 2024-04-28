@@ -99,4 +99,14 @@ function quotepress_redux_random_quote($atts) {
     wp_reset_postdata();
 }
 add_shortcode('random_quote', 'quotepress_redux_random_quote');
-?>
+
+/**
+ * Deactivation hook
+ */
+function quotepress_redux_deactivate() {
+	// Unregister the post type, so the rules are no longer in memory.
+	unregister_post_type( 'quotes' );
+	// Clear the permalinks to remove our post type's rules from the database.
+	flush_rewrite_rules();
+}
+//register_deactivation_hook( __FILE__, 'quotepress_redux_deactivate' );
