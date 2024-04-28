@@ -128,6 +128,22 @@ function quotepress_redux_save_quote_meta($post_id) {
 add_action('save_post', 'quotepress_redux_save_quote_meta');
 
 /**
+ * Style custom meta boxes
+ */
+function quotepress_redux_enqueue_admin_styles($hook) {
+    // Only enqueue the styles on the edit screens of the Quotes post type
+    if ('post.php' !== $hook && 'post-new.php' !== $hook) {
+        return;
+    }
+    global $post_type;
+    if ('quote' === $post_type) {
+        wp_enqueue_style('quotepress-redux-styles', plugin_dir_url(__FILE__) . 'css/quotepress-redux-styles.css');
+    }
+}
+add_action('admin_enqueue_scripts', 'quotepress_redux_enqueue_admin_styles');
+
+
+/**
  * Shortcode for displaying a random quote
  */
 function quotepress_redux_random_quote($atts) {
