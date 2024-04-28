@@ -191,6 +191,43 @@ function quotepress_redux_random_quote($atts) {
 add_shortcode('random_quote', 'quotepress_redux_random_quote');
 
 /**
+ * Create Exclusive Custom Taxonomy
+ */
+function view_init() {
+	register_taxonomy(
+		'quotes',
+		'post',
+		array(
+			'label' => __( 'Quotes' ),
+			'capabilities' => array(
+				'assign_terms' => 'edit_quotes',
+				'edit_terms' => 'publish_quotes'
+			)
+		)
+	);
+}
+add_action( 'init', 'quotes_init' );
+
+register_taxonomy( 'custom_taxonomy', 'post', array(
+	'labels' => array(
+		'name' => 'register_taxonomy( 'custom_taxonomy', 'post', array(
+	'labels' => array(
+		'name' => 'Quotes Taxonomy'
+	),
+	'show_in_quick_edit' => false,
+	'meta_box_cb' => false
+)); Taxonomy'
+	),
+	'show_in_quick_edit' => false,
+	'meta_box_cb' => false
+));
+
+add_action('add_meta_boxes', 'add_custom_meta_box');
+function add_custom_meta_box(){
+	add_meta_box( 'taxonomy_box', __('Quotes Taxonomy'), 'fill_custom_meta_box_content', 'post' ,'side');
+}
+
+/**
  * Deactivation hook
  */
 function quotepress_redux_deactivate() {
