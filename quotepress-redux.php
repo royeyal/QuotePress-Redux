@@ -199,7 +199,7 @@ function quotepress_redux_deactivate() {
 	// Clear the permalinks to remove our post type's rules from the database.
 	flush_rewrite_rules();
 }
-//register_deactivation_hook( __FILE__, 'quotepress_redux_deactivate' );
+register_deactivation_hook( __FILE__, 'quotepress_redux_deactivate' );
 
 /**
  * Filter quotes using AJAX 
