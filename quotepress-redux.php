@@ -149,8 +149,8 @@ add_action('admin_enqueue_scripts', 'quotepress_redux_enqueue_admin_styles');
 function quotepress_redux_random_quote($atts) {
     $atts = shortcode_atts(array(
         'text_color' => 'black',
-        'font_size' => '16px',
-        'background_color' => 'none',
+        'font_size' => 'clamp(1.39rem, 1.39rem + ((1vw - 0.2rem) * 0.767), 1.85rem)',
+        'background_color' => 'transparent',
     ), $atts);
 
     $args = array(
