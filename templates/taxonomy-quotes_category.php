@@ -1,8 +1,8 @@
 <?php
 /**
- * Template Name: Quote Archive
+ * Template Name: Quote Category Archive
  *
- * This template displays the archive page for the "Quotes" custom post type.
+ * This template displays the archive page for the "Quotes Category" taxonomy.
  */
 
 get_header(); ?>
@@ -22,7 +22,7 @@ get_header(); ?>
                 while ( have_posts() ) :
                     the_post();
                 ?>
-                    <div class="quote-archive-item">
+                    <div id="post-<?php the_ID(); ?>" <?php post_class('quote-archive-item'); ?>>
                         <?php
                         if ( has_post_thumbnail() ) {
                             // Display the featured image as a square with a class for styling.
