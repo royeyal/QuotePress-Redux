@@ -60,7 +60,7 @@ function quotepress_redux_custom_post_type() {
         'show_in_rest'          => true,
         'rewrite'               => true,
     );
-    register_post_type('quote', $args);
+    register_post_type('quotes', $args);
 }
 add_action('init', 'quotepress_redux_custom_post_type', 0);
 
@@ -86,6 +86,6 @@ function quotepress_redux_register_taxonomy() {
         'rewrite' => array( 'slug' => 'quotes-category' ),
         'show_admin_column' => true
     );    
-    register_taxonomy( 'quotes_category', array( 'quote' ), $args);      
+    register_taxonomy( 'quotes_category', array( 'quotes' ), $args);      
 }
 add_action( 'init', 'quotepress_redux_register_taxonomy' );
