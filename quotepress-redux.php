@@ -18,6 +18,7 @@ require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/custom-post-type.php';
 require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/shortcode.php';
 require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/custom-fields.php';
 require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/template-logic.php';
+
 // require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/sidebar-widget.php';
 // require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/settings-page.php';
 

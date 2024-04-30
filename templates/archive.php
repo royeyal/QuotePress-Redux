@@ -1,11 +1,11 @@
 <?php
 /**
- * Template Name: Quote Category Archive
+ * Template Name: Quote Archive
  *
- * This template displays the archive page for the "Quotes Category" taxonomy.
+ * This template displays the archive page for the "Quotes" custom post type.
  */
 
-get_header(); ?>
+//get_header(); ?>
 
 <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
@@ -22,7 +22,7 @@ get_header(); ?>
                 while ( have_posts() ) :
                     the_post();
                 ?>
-                    <div id="post-<?php the_ID(); ?>" <?php post_class('quote-archive-item'); ?>>
+                    <div class="quote-archive-item">
                         <?php
                         if ( has_post_thumbnail() ) {
                             // Display the featured image as a square with a class for styling.
@@ -59,4 +59,4 @@ get_header(); ?>
     </main><!-- .site-main -->
 </div><!-- .content-area -->
 
-<?php get_footer(); ?>
+<?php //get_footer(); ?>
