@@ -177,7 +177,6 @@ function quotepress_redux_enqueue_admin_styles($hook) {
 }
 add_action('admin_enqueue_scripts', 'quotepress_redux_enqueue_admin_styles');
 
-
 /**
  * Shortcode for displaying a random quote
  */
@@ -201,7 +200,7 @@ function quotepress_redux_random_quote($atts) {
             $quote_text = get_post_meta(get_the_ID(), 'quote_text', true);
             $author = get_post_meta(get_the_ID(), 'author', true);
 
-            $output = "<blockquote class='wp-block-quote' style='color: {$atts['text_color']}; font-size: {$atts['font_size']}; background-color: {$atts['background_color']};'>";
+            $output = "<blockquote class='wp-block-quote' style='color: {$atts['text_color']}; font-size: {$atts['font_size']}; background-color: {$atts['background_color']}; padding: .5rem 1.5rem; border-radius: 1rem;'>";
             $output .= "<p>{$quote_text}</p>";
             $output .= "<p><em>- {$author}</em></p>";
             $output .= "</blockquote>";
