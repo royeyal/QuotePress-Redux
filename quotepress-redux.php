@@ -17,17 +17,9 @@ define('QUOTEPRESSREDUX_PLUGIN_URL', plugin_dir_url(__FILE__));
 require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/custom-post-type.php';
 require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/shortcode.php';
 require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/custom-fields.php';
-
-/**
- * Deactivation hook
- */
-function quotepress_redux_deactivate() {
-	// Unregister the post type, so the rules are no longer in memory.
-	unregister_post_type( 'quotes' );
-	// Clear the permalinks to remove our post type's rules from the database.
-	flush_rewrite_rules();
-}
-//register_deactivation_hook( __FILE__, 'quotepress_redux_deactivate' );
+require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/archive-quotes.php';
+// require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/sidebar-widget.php';
+// require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/settings-page.php';
 
 /**
  * Filter quotes using AJAX 
