@@ -16,16 +16,33 @@ get_header(); ?>
                 <h1 class="page-title"><?php post_type_archive_title(); ?></h1>
             </header><!-- .page-header -->
 
+            <div class="quote-archive-grid">
+                <?php
+                // Start the Loop.
+                while ( have_posts() ) :
+                    the_post();
+                ?>
+                    <div class="quote-archive-item">
+                        <?php
+                        if ( has_post_thumbnail() ) {
+                            // Display the featured image as a square with a class for styling.
+                            the_post_thumbnail( 'thumbnail', array( 'class' => 'quote-archive-thumbnail' ) );
+                        } else {
+                            // Display a blank square image if no featured image is set.
+                            echo '<img src="' . esc_url( QUOTEPRESSREDUX_PLUGIN_URL . 'images/blank-square.webp' ) . '" alt="Blank Square" class="quote-archive-thumbnail blank-square">';
+                        }
+                        ?>
+                        <div class="quote-archive-content">
+                            <h2 class="quote-archive-title"><?php the_title(); ?></h2>
+                            <div class="quote-archive-excerpt"><?php the_excerpt(); ?></div>
+                        </div>
+                    </div><!-- .quote-archive-item -->
+                <?php
+                endwhile;
+                ?>
+            </div><!-- .quote-archive-grid -->
+
             <?php
-            // Start the Loop.
-            while ( have_posts() ) :
-                the_post();
-
-                // Include the template for the content of the quotes (e.g., content-quote.php).
-                get_template_part( 'content', 'quote' );
-
-            endwhile;
-
             // Previous/next page navigation.
             the_posts_pagination();
 
