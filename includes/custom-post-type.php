@@ -80,9 +80,10 @@ function quotepress_redux_register_taxonomy() {
     $args = array(
         'labels' => $labels,
         'hierarchical' => true,
+        'has_archive' => true,
         'sort' => true,
         'args' => array( 'orderby' => 'term_order' ),
-        'rewrite' => array( 'slug' => 'quotes_category' ),
+        'rewrite' => array( 'slug' => 'quotes-category' ),
         'show_admin_column' => true
     );    
     register_taxonomy( 'quotes_category', array( 'quote' ), $args);      
