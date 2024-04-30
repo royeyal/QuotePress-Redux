@@ -22,14 +22,14 @@ function quotepress_redux_quote_meta_box_callback($post) {
 
     // Retrieve existing values from the database
     $quote_text = get_post_meta($post->ID, 'quote_text', true);
-    $author = get_post_meta($post->ID, 'author', true);
+    $quote_author = get_post_meta($post->ID, 'quote_author', true);
 
     // HTML for the meta box fields
     echo '<p><label for="quotepress_redux_quote_text">' . __('Quote Text', 'text_domain') . '</label>';
     echo '<textarea id="quotepress_redux_quote_text" name="quotepress_redux_quote_text" rows="4" cols="50">' . esc_textarea($quote_text) . '</textarea></p>';
 
     echo '<p><label for="quotepress_redux_author">' . __('Author', 'text_domain') . '</label>';
-    echo '<input type="text" id="quotepress_redux_author" name="quotepress_redux_author" value="' . esc_attr($author) . '" size="25" /></p>';
+    echo '<input type="text" id="quotepress_redux_author" name="quotepress_redux_author" value="' . esc_attr($quote_author) . '" size="25" /></p>';
 }
 
 // Save the meta box data

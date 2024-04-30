@@ -5,7 +5,7 @@
  * This template displays the archive page for the "Quotes" custom post type.
  */
 
-get_header(); ?>
+//get_header(); ?>
 
 <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
@@ -31,11 +31,14 @@ get_header(); ?>
                             // Display a blank square image if no featured image is set.
                             echo '<img src="' . esc_url( QUOTEPRESSREDUX_PLUGIN_URL . 'images/blank-square.webp' ) . '" alt="Blank Square" class="quote-archive-thumbnail blank-square">';
                         }
+
+                        $quote_text = get_field('quote_text');
+                        $quote_author = get_field('quote_author');
                         ?>
-                        <div class="quote-archive-content">
-                            <h2 class="quote-archive-title"><?php the_title(); ?></h2>
-                            <div class="quote-archive-excerpt"><?php the_excerpt(); ?></div>
-                        </div>
+                        <blockquote class="wp-block-quote quotepress-block">
+                            <p class="quote-archive-text"><?php echo esc_html($quote_author); ?></p>
+                            <p class="quote-archive-author"><?php echo esc_html($quote_text); ?></p>
+                        </blockquote>
                     </div><!-- .quote-archive-item -->
                 <?php
                 endwhile;
@@ -56,4 +59,4 @@ get_header(); ?>
     </main><!-- .site-main -->
 </div><!-- .content-area -->
 
-<?php get_footer(); ?>
+<?php //get_footer(); ?>
