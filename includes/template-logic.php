@@ -5,14 +5,14 @@ function quotepress_redux_init_template_logic($original_template) {
 
     $file = trailingslashit(get_template_directory()) . 'archive-quotes.php';
 
-    if(is_post_type_archive('links')) {
+    if(is_post_type_archive('quote')) {
     // some additional logic goes here^.
         if(file_exists($file)) {
             return trailingslashit(get_template_directory()).'archive-quotes.php';
         } else {
             return plugin_dir_path(__DIR__) . 'templates/archive-quotes.php';
         }
-    } elseif(is_singular('links')) {
+    } elseif(is_singular('quote')) {
         if(file_exists(get_template_directory_uri() . '/single-quotes.php')) {
             return get_template_directory_uri() . '/single-quotes.php';
         } else {
