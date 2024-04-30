@@ -17,9 +17,16 @@ define('QUOTEPRESSREDUX_PLUGIN_URL', plugin_dir_url(__FILE__));
 require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/custom-post-type.php';
 require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/shortcode.php';
 require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/custom-fields.php';
-require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/archive-quotes.php';
+//require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/archive-quotes.php';
 // require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/sidebar-widget.php';
 // require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/settings-page.php';
+
+// Frontend styles
+function quotepress_redux_enqueue_styles() {
+    wp_enqueue_style('quotepress-redux-styles', plugin_dir_url(__FILE__) . 'css/quotepress-redux.css');
+}
+add_action('wp_enqueue_scripts', 'quotepress_redux_enqueue_styles');
+
 
 /**
  * Filter quotes using AJAX 
