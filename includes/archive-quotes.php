@@ -16,7 +16,7 @@ get_header(); ?>
                 <h1 class="page-title"><?php post_type_archive_title(); ?></h1>
             </header><!-- .page-header -->
 
-            <div class="quote-archive-grid">
+            <div class="quotes-archive-container">
                 <?php
                 // Start the Loop.
                 while ( have_posts() ) :
