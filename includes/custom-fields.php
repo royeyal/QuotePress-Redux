@@ -8,7 +8,7 @@ function quotepress_redux_add_custom_meta_boxes() {
         'quotepress_redux_quote_details', // ID of the meta box
         __('Quote Details', 'text_domain'), // Title of the meta box
         'quotepress_redux_quote_meta_box_callback', // Callback function
-        'quote', // Post type
+        'quotes', // Post type
         'normal', // Context
         'high' // Priority
     );
@@ -70,7 +70,7 @@ function quotepress_redux_enqueue_admin_styles($hook) {
         return;
     }
     global $post_type;
-    if ('quote' === $post_type) {
+    if ('quotes' === $post_type) {
         wp_enqueue_style('quotepress-redux-styles', QUOTEPRESSREDUX_PLUGIN_URL . 'css/quotepress-redux-styles.css');
     }
 }
