@@ -56,7 +56,7 @@ function quotepress_redux_save_quote_meta($post_id) {
 
     // Save or update the Author
     if (isset($_POST['quotepress_redux_author'])) {
-        update_post_meta($post_id, 'author', sanitize_text_field($_POST['quotepress_redux_author']));
+        update_post_meta($post_id, 'quote_author', sanitize_text_field($_POST['quotepress_redux_author']));
     }
 }
 add_action('save_post', 'quotepress_redux_save_quote_meta');
@@ -71,7 +71,7 @@ function quotepress_redux_enqueue_admin_styles($hook) {
     }
     global $post_type;
     if ('quote' === $post_type) {
-        wp_enqueue_style('quotepress-redux-styles', plugin_dir_url(__FILE__) . 'css/quotepress-redux-styles.css');
+        wp_enqueue_style('quotepress-redux-styles', QUOTEPRESSREDUX_PLUGIN_URL . 'css/quotepress-redux-styles.css');
     }
 }
 add_action('admin_enqueue_scripts', 'quotepress_redux_enqueue_admin_styles');
