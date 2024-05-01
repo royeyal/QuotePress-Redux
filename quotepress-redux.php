@@ -17,7 +17,30 @@ define('QUOTEPRESSREDUX_PLUGIN_URL', plugin_dir_url(__FILE__));
 require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/custom-post-type.php';
 require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/shortcode.php';
 require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/custom-fields.php';
-require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/template-logic.php';
+//require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/template-logic.php';
+
+function get_custom_post_type_template( $archive_template ) {
+    global $post;
+
+    if ( is_post_type_archive ( 'quotes' ) || is_tax('quotes_category') ) {
+         $archive_template = QUOTEPRESSREDUX_PLUGIN_DIR . '/templates/archive-quotes.php';
+    }
+    return $archive_template;
+}
+add_filter( 'archive_template', 'get_custom_post_type_template' ) ;
+
+function my_custom_template($single) {
+    global $post;
+
+    /* Checks for single template by post type */
+    if ( $post->post_type == 'quotes' ) {
+        if ( file_exists( QUOTEPRESSREDUX_PLUGIN_DIR . '/templates/single-quotes.php' ) ) {
+            return QUOTEPRESSREDUX_PLUGIN_DIR . '/templates/single-quotes.php';
+        }
+    }
+    return $single;
+}
+add_filter('single_template', 'my_custom_template');
 
 // require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/sidebar-widget.php';
 // require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/settings-page.php';
@@ -39,7 +62,7 @@ function quotepress_redux_enqueue_scripts() {
         'nonce'    => wp_create_nonce('quotepress_ajax_nonce')
     ));
 }
-//add_action('wp_enqueue_scripts', 'quotepress_redux_enqueue_scripts');
+add_action('wp_enqueue_scripts', 'quotepress_redux_enqueue_scripts');
 
 function quotepress_redux_filter_quotes() {
     check_ajax_referer('quotepress_ajax_nonce', 'nonce');
@@ -89,5 +112,5 @@ function quotepress_redux_filter_quotes() {
 
     wp_die(); // this is required to terminate immediately and return a proper response
 }
-//add_action('wp_ajax_filter_quotes', 'quotepress_redux_filter_quotes');
-//add_action('wp_ajax_nopriv_filter_quotes', 'quotepress_redux_filter_quotes');
+add_action('wp_ajax_filter_quotes', 'quotepress_redux_filter_quotes');
+add_action('wp_ajax_nopriv_filter_quotes', 'quotepress_redux_filter_quotes');
