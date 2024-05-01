@@ -1,22 +1,20 @@
 jQuery(document).ready(function($) {
-    $('.quote-filter').on('change', function() {
-        var filter = {
-            'author': $('#author-filter').val(),
-            'category': $('#category-filter').val(),
-            'tag': $('#tag-filter').val()
-        };
-
+    $(".cat-list_item").on("click", function () {
+        $(".cat-list_item").removeClass("active");
+        $(this).addClass("active");
+    
         $.ajax({
-            url: quotepress_ajax_params.ajax_url,
-            type: 'POST',
+            type: "POST",
+            url: "/wp-admin/admin-ajax.php",
+            dataType: "html",
             data: {
-                action: 'filter_quotes',
-                nonce: quotepress_ajax_params.nonce,
-                filter: filter
+                action: "filter_projects",
+                category: $(this).data("slug"),
+                type: $(this).data('type'),
             },
-            success: function(response) {
-                $('#quotes-list').html(response);
-            }
+            success: function (res) {
+                $(".project-tiles").html(res);
+            },
         });
-    });
+    });    
 });

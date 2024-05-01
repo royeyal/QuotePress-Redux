@@ -7,69 +7,41 @@
 
 get_header(); ?>
 
-<?php
-function quotepress_redux_filter_quotes() {
-    check_ajax_referer('quotepress_ajax_nonce', 'nonce');
+<?php 
+$categories = get_terms( array(
+	'taxonomy' => 'quotes_category',
+	'hide_empty' => false
+) );
+?>
+<ul class="cat-list">
+  <li><a class="cat-list_item active" href="#!" data-slug="">All quotes</a></li>
 
-    $args = array(
-        'post_type' => 'quotes',
-        'posts_per_page' => -1
-    );
+  <?php foreach($categories as $category) : ?>
+    <li>
+      <a class="cat-list_item" href="#!" data-slug="<?= $category->slug; ?>" data-type="quotes">
+        <?= $category->name; ?>
+      </a>
+    </li>
+  <?php endforeach; ?>
+</ul>
 
-    // Add tax_query to $args based on AJAX request
-    $tax_query = array('relation' => 'AND');
-    if (!empty($_POST['filter']['author'])) {
-        $tax_query[] = array(
-            'taxonomy' => 'author',
-            'field'    => 'slug',
-            'terms'    => sanitize_text_field($_POST['filter']['author'])
-        );
-    }
-    if (!empty($_POST['filter']['category'])) {
-        $tax_query[] = array(
-            'taxonomy' => 'quotes-category',
-            'field'    => 'slug',
-            'terms'    => sanitize_text_field($_POST['filter']['category'])
-        );
-    }
-    if (!empty($_POST['filter']['tag'])) {
-        $tax_query[] = array(
-            'taxonomy' => 'post_tag',
-            'field'    => 'slug',
-            'terms'    => sanitize_text_field($_POST['filter']['tag'])
-        );
-    }
-    if (count($tax_query) > 1) {
-        $args['tax_query'] = $tax_query;
-    }
-
-    $query = new WP_Query($args);
-    if ($query->have_posts()) {
-        while ($query->have_posts()) {
-            $query->the_post();
-            // Output your quote markup
-            echo '<div class="quote">' . get_the_content() . '</div>';
-        }
-    } else {
-        echo 'No quotes found.';
-    }
-
-    wp_die(); // this is required to terminate immediately and return a proper response
-}
-add_action('wp_ajax_filter_quotes', 'quotepress_redux_filter_quotes');
-add_action('wp_ajax_nopriv_filter_quotes', 'quotepress_redux_filter_quotes');
+<!-- Querying over WordPress Posts and Custom Post Types -->
+<?php 
+  $projects = new WP_Query([
+    'post_type' => 'quotes',
+    'posts_per_page' => -1,
+    'order_by' => 'date',
+    'order' => 'desc',
+  ]);
 ?>
 
-<div id="primary" class="content-area"">
-    <main id="main" class="site-main" role="main">
+<?php if($projects->have_posts()): ?>
+  <ul class="project-tiles">
+    <?php
+      while($projects->have_posts()) : $projects->the_post();
+?>
 
-        <?php if ( have_posts() ) : ?>
-
-            <header class="page-header">
-                <h1 class="page-title"><?php post_type_archive_title(); ?></h1>
-            </header><!-- .page-header -->
-
-            <div class="quotes-archive-container">
+<div class="quotes-archive-container">
                 <?php
                 // Start the Loop.
                 while ( have_posts() ) :
@@ -98,18 +70,9 @@ add_action('wp_ajax_nopriv_filter_quotes', 'quotepress_redux_filter_quotes');
                 ?>
             </div><!-- .quote-archive-grid -->
 
-            <?php
-            // Previous/next page navigation.
-            the_posts_pagination();
-
-        else :
-            // If no content, include the "No quotes found" template.
-            get_template_part( 'content', 'none' );
-
-        endif;
-        ?>
-
-    </main><!-- .site-main -->
-</div><!-- .content-area -->
-
-<?php get_footer(); ?>
+<?php
+      endwhile;
+    ?>
+  </ul>
+  <?php wp_reset_postdata(); ?>
+<?php endif; ?>
