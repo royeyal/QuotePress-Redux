@@ -86,6 +86,7 @@ function quotepress_redux_register_taxonomy() {
         'rewrite' => array( 'slug' => 'quotes-category' ),
         'show_admin_column' => true,
         'show_in_rest' => true,
+        'query_var' => true,
     );    
     register_taxonomy( 'quotes_category', array( 'quotes' ), $args);      
 }

@@ -7,7 +7,60 @@
 
 get_header(); ?>
 
-<div id="primary" class="content-area">
+<?php
+function quotepress_redux_filter_quotes() {
+    check_ajax_referer('quotepress_ajax_nonce', 'nonce');
+
+    $args = array(
+        'post_type' => 'quotes',
+        'posts_per_page' => -1
+    );
+
+    // Add tax_query to $args based on AJAX request
+    $tax_query = array('relation' => 'AND');
+    if (!empty($_POST['filter']['author'])) {
+        $tax_query[] = array(
+            'taxonomy' => 'author',
+            'field'    => 'slug',
+            'terms'    => sanitize_text_field($_POST['filter']['author'])
+        );
+    }
+    if (!empty($_POST['filter']['category'])) {
+        $tax_query[] = array(
+            'taxonomy' => 'quotes-category',
+            'field'    => 'slug',
+            'terms'    => sanitize_text_field($_POST['filter']['category'])
+        );
+    }
+    if (!empty($_POST['filter']['tag'])) {
+        $tax_query[] = array(
+            'taxonomy' => 'post_tag',
+            'field'    => 'slug',
+            'terms'    => sanitize_text_field($_POST['filter']['tag'])
+        );
+    }
+    if (count($tax_query) > 1) {
+        $args['tax_query'] = $tax_query;
+    }
+
+    $query = new WP_Query($args);
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            // Output your quote markup
+            echo '<div class="quote">' . get_the_content() . '</div>';
+        }
+    } else {
+        echo 'No quotes found.';
+    }
+
+    wp_die(); // this is required to terminate immediately and return a proper response
+}
+add_action('wp_ajax_filter_quotes', 'quotepress_redux_filter_quotes');
+add_action('wp_ajax_nopriv_filter_quotes', 'quotepress_redux_filter_quotes');
+?>
+
+<div id="primary" class="content-area"">
     <main id="main" class="site-main" role="main">
 
         <?php if ( have_posts() ) : ?>
