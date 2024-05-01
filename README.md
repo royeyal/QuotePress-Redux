@@ -5,6 +5,9 @@ The plugin creates a new custom post type called **Quotes**, with support for ca
 
 The plugin implements custom fields for **Quote Text** and **Author** for each quote.
 
+## Taxonomy
+This plugin uses its own taxonomy: Quote Categories. Create as many as you seem fit.
+
 ## Shortcode
 The plugin should also has a shortcode called `[random_quote]` to display a random quote on any page or post.
 
@@ -17,3 +20,6 @@ You can use these parameters for the shortcode:
 
 For example:
 `[random_quote text_color="brown" font_size="2.5rem" background_color="#c7c2be"]`
+
+## Custom aArchive page
+This plugin uses its own custom archive, but still uses your site's header and footer
