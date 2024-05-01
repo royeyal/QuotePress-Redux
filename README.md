@@ -21,5 +21,5 @@ You can use these parameters for the shortcode:
 For example:
 `[random_quote text_color="brown" font_size="2.5rem" background_color="#c7c2be"]`
 
-## Custom aArchive page
+## Custom archive page
 This plugin uses its own custom archive, but still uses your site's header and footer
