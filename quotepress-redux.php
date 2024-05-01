@@ -17,9 +17,9 @@ define('QUOTEPRESSREDUX_PLUGIN_URL', plugin_dir_url(__FILE__));
 require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/custom-post-type.php';
 require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/shortcode.php';
 require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/custom-fields.php';
-//require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/template-logic.php';
 
-function get_custom_post_type_template( $archive_template ) {
+// Archive page for the custom taxonomy
+function quotepress_redux_get_custom_post_type_template( $archive_template ) {
     global $post;
 
     if ( is_post_type_archive ( 'quotes' ) || is_tax('quotes_category') ) {
@@ -27,9 +27,9 @@ function get_custom_post_type_template( $archive_template ) {
     }
     return $archive_template;
 }
-add_filter( 'archive_template', 'get_custom_post_type_template' ) ;
+add_filter( 'archive_template', 'quotepress_redux_get_custom_post_type_template' ) ;
 
-function my_custom_template($single) {
+function quotepress_redux_custom_template($single) {
     global $post;
 
     /* Checks for single template by post type */
@@ -40,7 +40,7 @@ function my_custom_template($single) {
     }
     return $single;
 }
-add_filter('single_template', 'my_custom_template');
+add_filter('single_template', 'quotepress_redux_custom_template');
 
 // require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/sidebar-widget.php';
 // require_once QUOTEPRESSREDUX_PLUGIN_DIR . 'includes/settings-page.php';
